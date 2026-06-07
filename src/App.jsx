@@ -11,12 +11,12 @@ const buildId = import.meta.env.VITE_BUILD_ID || __BUILD_ID__
 
 const initialProducts = {
   product1: {
-    cost: '4.75',
-    quantity: '4 x 330ml',
+    cost: '',
+    quantity: '',
   },
   product2: {
-    cost: '1.76',
-    quantity: '500ml',
+    cost: '',
+    quantity: '',
   },
 }
 
