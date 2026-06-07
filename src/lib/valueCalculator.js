@@ -76,7 +76,7 @@ export function calculateProductValue(product) {
   const unitPrice = (cost / quantity.amount) * quantity.basis
 
   return {
-    name: product.name?.trim() || product.fallbackName,
+    label: product.label,
     cost,
     quantity,
     unitPrice,
@@ -84,8 +84,8 @@ export function calculateProductValue(product) {
 }
 
 export function compareProducts(product1, product2) {
-  const first = calculateProductValue({ ...product1, fallbackName: 'Product 1' })
-  const second = calculateProductValue({ ...product2, fallbackName: 'Product 2' })
+  const first = calculateProductValue({ ...product1, label: 'Product 1' })
+  const second = calculateProductValue({ ...product2, label: 'Product 2' })
 
   if (first.quantity.family !== second.quantity.family) {
     throw new Error('These quantities use different unit types, so they cannot be compared.')

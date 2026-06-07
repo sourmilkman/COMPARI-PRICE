@@ -18,11 +18,11 @@ for (const [input, amount, family] of quantityCases) {
 }
 
 const dash = compareProducts(
-  { name: 'Waitrose Dash', cost: '4.75', quantity: '4 x 330ml' },
-  { name: 'M&S Dash', cost: '1.76', quantity: '500ml' },
+  { cost: '4.75', quantity: '4 x 330ml' },
+  { cost: '1.76', quantity: '500ml' },
 )
 
-assert.equal(dash.winner.name, 'M&S Dash')
+assert.equal(dash.winner.label, 'Product 2')
 assert.equal(dash.unitLabel, '100ml')
 assert.equal(Math.round(dash.first.unitPrice * 1000), 360)
 assert.equal(Math.round(dash.second.unitPrice * 1000), 352)
@@ -30,8 +30,8 @@ assert.equal(Math.round(dash.second.unitPrice * 1000), 352)
 assert.throws(
   () =>
     compareProducts(
-      { name: 'Drink', cost: '2', quantity: '500ml' },
-      { name: 'Snack', cost: '2', quantity: '250g' },
+      { cost: '2', quantity: '500ml' },
+      { cost: '2', quantity: '250g' },
     ),
   /different unit types/,
 )

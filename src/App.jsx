@@ -11,12 +11,10 @@ const buildId = import.meta.env.VITE_BUILD_ID || __BUILD_ID__
 
 const initialProducts = {
   product1: {
-    name: 'Waitrose Dash',
     cost: '4.75',
     quantity: '4 x 330ml',
   },
   product2: {
-    name: 'M&S Dash',
     cost: '1.76',
     quantity: '500ml',
   },
@@ -43,12 +41,6 @@ function ProductForm({ title, product, onChange }) {
   return (
     <section className="product-panel" aria-labelledby={`${title}-heading`}>
       <h2 id={`${title}-heading`}>{title}</h2>
-      <Field
-        label="Product"
-        value={product.name}
-        onChange={(value) => update('name', value)}
-        placeholder="Dash fruit drink"
-      />
       <Field
         label="Cost (£)"
         value={product.cost}
@@ -86,7 +78,7 @@ function Result({ result }) {
   const { comparison } = result
   const headline = comparison.isTie
     ? 'Both products are the same value'
-    : `${comparison.winner.name} is better value`
+    : `${comparison.winner.label} is better value`
 
   return (
     <section className="result-panel success" aria-live="polite">
@@ -99,14 +91,14 @@ function Result({ result }) {
       )}
       <div className="result-grid">
         <div>
-          <span>{comparison.first.name}</span>
+          <span>{comparison.first.label}</span>
           <strong>
             {formatCurrency(comparison.first.unitPrice)} / {comparison.unitLabel}
           </strong>
           <small>Total {formatCurrency(comparison.first.cost)}</small>
         </div>
         <div>
-          <span>{comparison.second.name}</span>
+          <span>{comparison.second.label}</span>
           <strong>
             {formatCurrency(comparison.second.unitPrice)} / {comparison.unitLabel}
           </strong>
