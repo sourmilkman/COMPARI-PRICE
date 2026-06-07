@@ -25,7 +25,6 @@
 }
 
 .build-label {
-  flex: 0 0 auto;
   padding: 7px 9px;
   border: 1px solid var(--border);
   border-radius: 999px;
@@ -33,6 +32,60 @@
   background: rgba(255, 255, 255, 0.045);
   font-size: 0.75rem;
   line-height: 1;
+}
+
+.header-actions {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.help-button {
+  min-height: 34px;
+  padding: 0 13px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.78rem;
+}
+
+.help-panel {
+  padding: 15px;
+  border: 1px solid rgba(101, 228, 206, 0.32);
+  border-radius: 20px;
+  background:
+    linear-gradient(145deg, rgba(101, 228, 206, 0.11), rgba(255, 255, 255, 0.035)),
+    var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.help-panel h2 {
+  margin-bottom: 10px;
+}
+
+.help-panel p {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.example-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.example-list span {
+  padding: 7px 9px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.22);
+  font-size: 0.86rem;
+  font-weight: 700;
 }
 
 .calculator {

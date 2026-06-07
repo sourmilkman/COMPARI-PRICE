@@ -112,6 +112,7 @@ function Result({ result }) {
 function App() {
   const [products, setProducts] = useState(initialProducts)
   const [calculation, setCalculation] = useState(null)
+  const [showHelp, setShowHelp] = useState(false)
 
   const canReset = useMemo(
     () => JSON.stringify(products) !== JSON.stringify(initialProducts) || calculation,
@@ -147,8 +148,33 @@ function App() {
           <p className="app-label">Phone value calculator</p>
           <h1>Compari Price</h1>
         </div>
-        <span className="build-label">build {buildId}</span>
+        <div className="header-actions">
+          <button
+            className="help-button"
+            type="button"
+            aria-expanded={showHelp}
+            aria-controls="input-help"
+            onClick={() => setShowHelp((current) => !current)}
+          >
+            Help
+          </button>
+          <span className="build-label">build {buildId}</span>
+        </div>
       </header>
+
+      {showHelp && (
+        <section className="help-panel" id="input-help" aria-label="Input examples">
+          <h2>Input examples</h2>
+          <div className="example-list">
+            <span>4 x 330ml</span>
+            <span>8x100g</span>
+            <span>1.5L</span>
+            <span>2 kg</span>
+            <span>12 items</span>
+          </div>
+          <p>Use the final price after any discount or offer.</p>
+        </section>
+      )}
 
       <form className="calculator" onSubmit={calculate}>
         <ProductForm
