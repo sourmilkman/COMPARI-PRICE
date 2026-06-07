@@ -8,12 +8,15 @@ const quantityCases = [
   ['500 ml', 500, 'volume'],
   ['250g', 250, 'weight'],
   ['2 kg', 2000, 'weight'],
+  ['8x100g', 800, 'weight'],
+  ['8oz', 226.796, 'weight'],
   ['12 items', 12, 'count'],
+  ['500', 500, 'unitless'],
 ]
 
 for (const [input, amount, family] of quantityCases) {
   const parsed = parseQuantity(input)
-  assert.equal(parsed.amount, amount, input)
+  assert.equal(Math.round(parsed.amount * 1000) / 1000, amount, input)
   assert.equal(parsed.family, family, input)
 }
 
@@ -27,11 +30,28 @@ assert.equal(dash.unitLabel, '100ml')
 assert.equal(Math.round(dash.first.unitPrice * 1000), 360)
 assert.equal(Math.round(dash.second.unitPrice * 1000), 352)
 
+const unitless = compareProducts(
+  { cost: '4.75', quantity: '1320' },
+  { cost: '1.76', quantity: '500' },
+)
+
+assert.equal(unitless.winner.label, 'Product 2')
+assert.equal(unitless.unitLabel, 'same unit')
+
 assert.throws(
   () =>
     compareProducts(
       { cost: '2', quantity: '500ml' },
       { cost: '2', quantity: '250g' },
+    ),
+  /different unit types/,
+)
+
+assert.throws(
+  () =>
+    compareProducts(
+      { cost: '2', quantity: '500ml' },
+      { cost: '2', quantity: '500' },
     ),
   /different unit types/,
 )

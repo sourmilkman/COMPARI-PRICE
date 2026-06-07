@@ -166,13 +166,16 @@ function App() {
         <section className="help-panel" id="input-help" aria-label="Input examples">
           <h2>Input examples</h2>
           <div className="example-list">
+            <span>330</span>
+            <span>500</span>
             <span>4 x 330ml</span>
             <span>8x100g</span>
             <span>1.5L</span>
             <span>2 kg</span>
+            <span>8oz</span>
             <span>12 items</span>
           </div>
-          <p>Use the final price after any discount or offer.</p>
+          <p>For like-for-like comparisons, plain numbers are enough. Add units only when needed.</p>
         </section>
       )}
 
@@ -200,7 +203,7 @@ function App() {
 
       <Result result={calculation} />
 
-      <p className="hint">Enter the final discounted price if a staff discount or offer applies.</p>
+      <p className="hint">Same unit is assumed. Add units only when converting measures.</p>
     </main>
   )
 }

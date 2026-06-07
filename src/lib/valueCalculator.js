@@ -16,6 +16,9 @@ const UNIT_ALIASES = new Map([
   ['kg', { family: 'weight', factor: 1000, label: '100g', basis: 100 }],
   ['kilogram', { family: 'weight', factor: 1000, label: '100g', basis: 100 }],
   ['kilograms', { family: 'weight', factor: 1000, label: '100g', basis: 100 }],
+  ['oz', { family: 'weight', factor: 28.3495, label: '100g', basis: 100 }],
+  ['ounce', { family: 'weight', factor: 28.3495, label: '100g', basis: 100 }],
+  ['ounces', { family: 'weight', factor: 28.3495, label: '100g', basis: 100 }],
   ['item', { family: 'count', factor: 1, label: 'item', basis: 1 }],
   ['items', { family: 'count', factor: 1, label: 'item', basis: 1 }],
   ['unit', { family: 'count', factor: 1, label: 'item', basis: 1 }],
@@ -25,8 +28,8 @@ const UNIT_ALIASES = new Map([
 ])
 
 const MULTIPLY_PATTERN =
-  /^\s*(?<count>\d+(?:\.\d+)?)\s*(?:x|\*)\s*(?<amount>\d+(?:\.\d+)?)\s*(?<unit>[a-zA-Z]+)\s*$/
-const SIMPLE_PATTERN = /^\s*(?<amount>\d+(?:\.\d+)?)\s*(?<unit>[a-zA-Z]+)\s*$/
+  /^\s*(?<count>\d+(?:\.\d+)?)\s*(?:x|\*)\s*(?<amount>\d+(?:\.\d+)?)\s*(?<unit>[a-zA-Z]+)?\s*$/
+const SIMPLE_PATTERN = /^\s*(?<amount>\d+(?:\.\d+)?)\s*(?<unit>[a-zA-Z]+)?\s*$/
 
 export function parseCost(value) {
   const normalized = String(value).replace(/[£,\s]/g, '')
@@ -49,11 +52,13 @@ export function parseQuantity(value) {
 
   const count = Number(match.groups.count ?? 1)
   const amount = Number(match.groups.amount)
-  const unitKey = match.groups.unit.toLowerCase()
-  const unit = UNIT_ALIASES.get(unitKey)
+  const unitKey = match.groups.unit?.toLowerCase()
+  const unit = unitKey
+    ? UNIT_ALIASES.get(unitKey)
+    : { family: 'unitless', factor: 1, label: 'same unit', basis: 1 }
 
   if (!unit) {
-    throw new Error('Use ml, L, g, kg, items, or packs.')
+    throw new Error('Use ml, L, g, kg, oz, items, or packs.')
   }
 
   const normalizedAmount = count * amount * unit.factor
@@ -88,7 +93,9 @@ export function compareProducts(product1, product2) {
   const second = calculateProductValue({ ...product2, label: 'Product 2' })
 
   if (first.quantity.family !== second.quantity.family) {
-    throw new Error('These quantities use different unit types, so they cannot be compared.')
+    throw new Error(
+      'These quantities use different unit types. Add units to both products, or leave both unitless only when they use the same unit.',
+    )
   }
 
   const [winner, loser] =
