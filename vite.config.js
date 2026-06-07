@@ -17,6 +17,16 @@ function getBuildId() {
 // https://vite.dev/config/
 export default defineConfig({
   base: process.env.GITHUB_PAGES === 'true' ? '/COMPARI-PRICE/' : '/',
+  build: {
+    rollupOptions: {
+      input: 'src/main.jsx',
+      output: {
+        assetFileNames: 'static/[name][extname]',
+        chunkFileNames: 'static/[name].js',
+        entryFileNames: 'static/[name].js',
+      },
+    },
+  },
   define: {
     __BUILD_ID__: JSON.stringify(getBuildId()),
   },
