@@ -14,7 +14,7 @@
     <title>Compari Price</title>
     <script>
       if (location.hostname.endsWith('github.io')) {
-        document.write('<link rel="stylesheet" href="./static/main.css" />')
+        document.write('<link rel="stylesheet" href="./static/main.css?v=0218c43" />')
       }
     </script>
   </head>
@@ -22,7 +22,7 @@
     <div id="root"></div>
     <script type="module">
       const entry = location.hostname.endsWith('github.io')
-        ? './static/main.js'
+        ? './static/main.js?v=0218c43'
         : '/src/main.jsx'
 
       import(entry)
