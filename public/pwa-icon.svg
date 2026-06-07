@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Compari Price app icon">
+  <rect width="512" height="512" rx="112" fill="#080b0f"/>
+  <rect x="70" y="74" width="372" height="364" rx="74" fill="#111820" stroke="rgba(255,255,255,0.14)" stroke-width="8"/>
+  <path d="M148 209h216M148 286h216" stroke="#65e4ce" stroke-width="34" stroke-linecap="round"/>
+  <circle cx="184" cy="171" r="28" fill="#f5f7fb"/>
+  <circle cx="328" cy="329" r="28" fill="#f5f7fb"/>
+  <path d="M178 356 334 142" stroke="#35c2f4" stroke-width="26" stroke-linecap="round"/>
+</svg>
